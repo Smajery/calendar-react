@@ -21,18 +21,16 @@ const Navbar: FC = () => {
                             theme="dark"
                             mode="horizontal"
                             selectable={false}
-                        >
-                            <Menu.Item onClick={() => navigate(RouteNames.LOGIN)} key={1}>Выйти</Menu.Item>
-                        </Menu>
+                            items={[{key: 1, label: 'Выйти'}]}
+                        />
                     </>
                     :
                     <Menu
                         theme="dark"
                         mode="horizontal"
                         selectable={false}
-                    >
-                        <Menu.Item onClick={() => navigate(RouteNames.LOGIN)} key={1}>Логин 1</Menu.Item>
-                    </Menu>
+                        items={[{key: 1, label: 'Логин 1'}]}
+                    />
                 }
             </Row>
         </Layout.Header>
