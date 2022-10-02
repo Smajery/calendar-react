@@ -1,17 +1,17 @@
-import {Actions, SetAuthAction, SetErrorAction, SetIsLoadingAction, SetUserAction} from "./types";
+import {AuthActions, SetAuthAction, SetErrorAction, SetIsLoadingAction, SetUserAction} from "./types";
 import {IUser} from "../../../models/IUser";
 import {AppDispatch} from "../../index";
-import axios from "axios";
+import UserService from "../../../api/UserService";
 
 export const AuthActionCreators = {
-    setUser: (user: IUser): SetUserAction => ({type: Actions.SET_USER, payload: user}),
-    setIsAuth: (isAuth: boolean): SetAuthAction => ({type: Actions.SET_AUTH, payload: isAuth}),
-    setIsLoading: (isLoading: boolean): SetIsLoadingAction => ({type: Actions.SET_IS_LOADING, payload: isLoading}),
-    setError: (error: string): SetErrorAction => ({type: Actions.SET_ERROR, payload: error}),
+    setUser: (user: IUser): SetUserAction => ({type: AuthActions.SET_USER, payload: user}),
+    setIsAuth: (isAuth: boolean): SetAuthAction => ({type: AuthActions.SET_AUTH, payload: isAuth}),
+    setIsLoading: (isLoading: boolean): SetIsLoadingAction => ({type: AuthActions.SET_IS_LOADING, payload: isLoading}),
+    setError: (error: string): SetErrorAction => ({type: AuthActions.SET_ERROR, payload: error}),
     login: (username: string, password: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AuthActionCreators.setIsLoading(true))
-            const response = await axios.get<IUser[]>('./tsconfig.json')
+            const response = await UserService.getUsers()
             const mockUsers = response.data.find(user => user.username === username && user.password === password)
             if(mockUsers){
                 localStorage.setItem('auth', 'true')

@@ -1,4 +1,4 @@
-import {AuthState, AuthAction, Actions} from "./types";
+import {AuthState, AuthAction, AuthActions} from "./types";
 import {IUser} from "../../../models/IUser";
 
 const initialState: AuthState = {
@@ -10,13 +10,13 @@ const initialState: AuthState = {
 
 export default function authReducer(state = initialState, action: AuthAction): AuthState {
     switch (action.type) {
-        case Actions.SET_AUTH:
+        case AuthActions.SET_AUTH:
             return {...state, isAuth: action.payload, isLoading: false}
-        case Actions.SET_USER:
+        case AuthActions.SET_USER:
             return {...state, user: action.payload}
-        case Actions.SET_ERROR:
+        case AuthActions.SET_ERROR:
             return {...state, error: action.payload, isLoading: false}
-        case Actions.SET_IS_LOADING:
+        case AuthActions.SET_IS_LOADING:
             return {...state, isLoading: action.payload}
         default:
             return state

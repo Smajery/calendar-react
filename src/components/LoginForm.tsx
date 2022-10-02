@@ -28,8 +28,8 @@ const LoginForm: FC = () => {
                 rules={[rules.required('Пожалуйста, введите свое имя')]}
             >
                 <Input
-                value={username}
-                onChange={e => setUsername(e.target.value)}
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
                 />
             </Form.Item>
             <Form.Item
@@ -37,10 +37,9 @@ const LoginForm: FC = () => {
                 name='password'
                 rules={[rules.required('Пожалуйста, введите свой пароль')]}
             >
-                <Input
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                type='password'
+                <Input.Password
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
                 />
             </Form.Item>
             <Form.Item>
