@@ -16,8 +16,8 @@ export const AuthActionCreators = {
             if(mockUsers){
                 localStorage.setItem('auth', 'true')
                 localStorage.setItem('username', mockUsers.username)
-                dispatch(AuthActionCreators.setIsAuth(true))
                 dispatch(AuthActionCreators.setUser(mockUsers))
+                dispatch(AuthActionCreators.setIsAuth(true))
                 dispatch(AuthActionCreators.setError(''))
             } else {
                 dispatch(AuthActionCreators.setError('Некорректный логин или пароль'))

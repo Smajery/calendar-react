@@ -4,16 +4,23 @@ import {Button, Layout, Modal, Row} from "antd";
 import EventForm from "../components/EventForm";
 import {useActions} from "../hooks/useActions";
 import {useTypedSelector} from "../hooks/useTypedSelector";
+import {IEvent} from "../models/IEvent";
 
 const Event: FC = () => {
     const [modalOpen, setModalOpen] = useState(false)
-    const {fetchGuests} = useActions()
-    const {guests} = useTypedSelector(state => state.event)
+    const {fetchGuests, createEvent, fetchEvent} = useActions()
+    const {guests, events} = useTypedSelector(state => state.event)
+    const {user} = useTypedSelector(state => state.auth)
 
     useEffect(() => {
         fetchGuests()
+        fetchEvent(user.username)
     }, [])
 
+    const addNewEvent = (event: IEvent) => {
+        setModalOpen(false)
+        createEvent(event)
+    }
     return (
         <Layout>
             <Row
@@ -26,7 +33,7 @@ const Event: FC = () => {
                     Добавить событие
                 </Button>
             </Row>
-            <EventCalendar events={[]}/>
+            <EventCalendar events={events}/>
             <Modal
                 title='Добавить событие'
                 open={modalOpen}
@@ -35,6 +42,7 @@ const Event: FC = () => {
             >
                 <EventForm
                     guests={guests}
+                    submit={addNewEvent}
                 />
             </Modal>
         </Layout>
