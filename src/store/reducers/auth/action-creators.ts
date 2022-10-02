@@ -18,6 +18,7 @@ export const AuthActionCreators = {
                 localStorage.setItem('username', mockUsers.username)
                 dispatch(AuthActionCreators.setIsAuth(true))
                 dispatch(AuthActionCreators.setUser(mockUsers))
+                dispatch(AuthActionCreators.setError(''))
             } else {
                 dispatch(AuthActionCreators.setError('Некорректный логин или пароль'))
             }
@@ -27,10 +28,9 @@ export const AuthActionCreators = {
         }
     },
     logout: () => async (dispatch: AppDispatch) => {
-        try {
-            
-        } catch (e) {
-            
-        }
+        localStorage.removeItem('auth')
+        localStorage.removeItem('username')
+        dispatch(AuthActionCreators.setUser({} as IUser))
+        dispatch(AuthActionCreators.setIsAuth(false))
     }
 }
