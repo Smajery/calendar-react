@@ -6,18 +6,22 @@ import {useActions} from "../hooks/useActions";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 
 const Event: FC = () => {
-    const [modalVisible, setModalVisible] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false)
     const {fetchGuests} = useActions()
     const {guests} = useTypedSelector(state => state.event)
 
     useEffect(() => {
         fetchGuests()
     }, [])
+
     return (
         <Layout>
-            <Row justify="center">
+            <Row
+                justify="center"
+                style={{marginTop: 15, marginBottom: 15}}
+            >
                 <Button
-                    onClick={() => setModalVisible(true)}
+                    onClick={() => setModalOpen(true)}
                 >
                     Добавить событие
                 </Button>
@@ -25,9 +29,9 @@ const Event: FC = () => {
             <EventCalendar events={[]}/>
             <Modal
                 title='Добавить событие'
-                visible={modalVisible}
+                open={modalOpen}
                 footer={null}
-                onCancel={() => setModalVisible(false)}
+                onCancel={() => setModalOpen(false)}
             >
                 <EventForm
                     guests={guests}
